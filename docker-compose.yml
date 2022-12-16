@@ -1,0 +1,11 @@
+version: "3.0"
+
+services:
+  api:
+    container_name: "api"
+    build: .
+    restart: always
+    tty: true
+    stdin_open: true
+    ports:
+      - 8000:8000
