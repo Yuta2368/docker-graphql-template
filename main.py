@@ -2,7 +2,7 @@ import graphene
 from fastapi import FastAPI, Request, Response
 from starlette_graphene3 import GraphQLApp, make_graphiql_handler
 
-# Create GraphQL schema using Grapheneを利用したGraphQLスキーマを作成する
+# Create GraphQL schema using Graphene
 class Query(graphene.ObjectType):
     # Create field "hello" w/ argument "name"
     hello = graphene.String(name=graphene.String(default_value="stranger"))
