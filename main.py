@@ -1,21 +1,20 @@
 import graphene
 from fastapi import FastAPI, Request, Response
-#from starlette.graphql import GraphQLApp
 from starlette_graphene3 import GraphQLApp, make_graphiql_handler
 
-# Grapheneを利用したGraphQLスキーマを作成する
+# Create GraphQL schema using Grapheneを利用したGraphQLスキーマを作成する
 class Query(graphene.ObjectType):
-    # 引数nameを持つフィールドhelloを作成
+    # Create field "hello" w/ argument "name"
     hello = graphene.String(name=graphene.String(default_value="stranger"))
 
-    # フィールドhelloに対するユーザへ返すクエリレスポンスを定義
+    # Define a query response to be returned for field "hello"
     def resolve_hello(self, info, name):
         print("resolve_hello")
         return "Hello" + name
 
-# FastAPIを利用するためのインスタンスを作成
+# Create FastAPI instance
 app = FastAPI()
-# GraphQLのエンドポイント
+# GraphQL endopoint
 schema = graphene.Schema(query=Query)
 app.mount("/graphql", GraphQLApp(schema, on_get=make_graphiql_handler()))
 
